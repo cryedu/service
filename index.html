@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StelHub - Your Trusted Solution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+        }
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 0px);
+            overflow: hidden;
+        }
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+        .pulse-ring {
+            animation: pulse-ring 2s infinite;
+        }
+        @keyframes slide-up {
+            from { transform: translateY(120%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .slide-up {
+            animation: slide-up 0.5s ease-out forwards;
+        }
+        @keyframes bounce-in {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .bounce-in {
+            animation: bounce-in 0.6s ease-out forwards;
+        }
+        .call-cta-hidden {
+            display: none !important;
+        }
+        .iframe-hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Iframe Landing Page - Hidden on Mobile & Desktop (shown only on Tablet/BOTs) -->
+    <div id="iframeContainer" class="iframe-container">
+        <iframe 
+            src="https://stelhub.netlify.app/" 
+            title="StelHub"
+            allow="fullscreen"
+            loading="eager">
+        </iframe>
+    </div>
+
+    <!-- Customer Service Overlay - Full Page - Mobile & Desktop (Hidden on Tablet/BOTs). Call CTA shown on Mobile only. -->
+    <div id="callCtaContainer" class="call-cta-hidden fixed inset-0 z-50 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4 overflow-y-auto">
+        <div class="w-full max-w-md">
+            <!-- Close Button -->
+            <button onclick="closeCallCta()" class="absolute top-5 right-5 w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-colors backdrop-blur-sm">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Overlay Content -->
+            <div class="text-center bounce-in">
+                <!-- Animated Phone Icon -->
+                <div class="relative inline-block mb-8">
+                    <div class="absolute inset-0 bg-green-500 rounded-full blur-2xl opacity-40 animate-pulse"></div>
+                    <div class="relative w-28 h-28 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto pulse-ring shadow-2xl">
+                        <i class="fa-solid fa-headset text-white text-5xl"></i>
+                    </div>
+                </div>
+
+                <!-- Heading -->
+                <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight">
+                    Need Help?
+                    <span class="block text-green-400">We're Here For You!</span>
+                </h1>
+
+                <p class="text-slate-300 text-base md:text-lg mb-2">
+                    24/7 Customer Support
+                </p>
+                <p class="text-slate-400 text-sm md:text-base mb-8 max-w-sm mx-auto">
+                    Our friendly team is ready to assist you. Reach out to us anytime.
+                </p>
+
+                <!-- Call CTA Elements - shown on Mobile only, hidden on Desktop -->
+                <div id="callCtaElements">
+                    <!-- Phone Number Display -->
+                    <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 mb-6 inline-block">
+                        <span class="text-white/60 text-xs uppercase tracking-wider font-semibold">Support Hotline</span>
+                        <div class="text-white text-2xl md:text-3xl font-bold tracking-wide">
+                            +1 (213) 597-5009
+                        </div>
+                    </div>
+
+                    <!-- Call CTA Button -->
+                    <a href="tel:+12135975009" class="flex items-center justify-center gap-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-5 px-8 rounded-2xl transition-all shadow-2xl shadow-green-500/30 hover:shadow-green-500/50 hover:scale-[1.02] active:scale-[0.98] text-xl">
+                        <i class="fa-solid fa-phone text-2xl"></i>
+                        <span>Call +1 (213) 597-5009</span>
+                    </a>
+                </div>
+
+                <!-- Trust badges -->
+                <div class="flex items-center justify-center gap-6 mt-8 text-slate-400 text-sm">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-green-400"></i>
+                        <span>Secure</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-clock text-green-400"></i>
+                        <span>24/7</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-user-tie text-green-400"></i>
+                        <span>Experts</span>
+                    </div>
+                </div>
+
+                <!-- Dismiss option -->
+                <button onclick="closeCallCta()" class="mt-8 text-slate-400 hover:text-slate-200 text-sm transition-colors underline underline-offset-4">
+                    No thanks, I'll browse first
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Device & BOT Detection
+        function detectEnvironment() {
+            const ua = navigator.userAgent || '';
+            const uaLower = ua.toLowerCase();
+
+            // BOT detection
+            const botPatterns = [
+                'bot', 'crawl', 'spider', 'slurp', 'bingpreview', 'facebookexternalhit',
+                'facebot', 'twitterbot', 'linkedinbot', 'pinterest', 'whatsapp',
+                'telegrambot', 'slackbot', 'discordbot', 'baidu', 'yandex', 'duckduckbot',
+                'applebot', 'semrushbot', 'ahrefsbot', 'petalbot', 'bytespider',
+                'gptbot', 'chatgpt', 'anthropic', 'claude', 'perplexity', 'cohere',
+                'datadog', 'uptimerobot', 'pingdom', 'wget', 'curl', 'python-requests',
+                'go-http-client', 'java/', 'ruby', 'php/', 'libwww', 'httpclient',
+                'monitor', 'headless', 'phantomjs', 'casperjs', 'splash', 'prerender'
+            ];
+            const isBot = botPatterns.some(pattern => uaLower.includes(pattern));
+
+            // Detect tablet via user agent
+            const tabletUa = /ipad|tablet|playbook|silk|(android(?!.*mobile))|kindle|leappad|kftt/i.test(ua);
+
+            // Screen dimensions for device classification
+            const width = window.innerWidth || screen.width;
+            const height = window.innerHeight || screen.height;
+            const isPortrait = height >= width;
+
+            // Tablet by screen size (768px - 1024px width, or tablet UA)
+            // Mobile: width < 768px
+            // Desktop: width > 1024px
+            let deviceType = 'desktop';
+
+            if (tabletUa) {
+                deviceType = 'tablet';
+            } else if (width < 768) {
+                deviceType = 'mobile';
+            } else if (width <= 1024) {
+                // Check if it's a tablet by touch + UA hints
+                const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+                if (isTouch && !uaLower.includes('windows')) {
+                    deviceType = 'tablet';
+                } else {
+                    deviceType = 'tablet';
+                }
+            } else {
+                deviceType = 'desktop';
+            }
+
+            return {
+                isBot: isBot,
+                deviceType: deviceType,
+                width: width,
+                height: height
+            };
+        }
+
+        // Show Customer Service Overlay for Mobile & Desktop, hide for Tablet/BOTs.
+        // Hide Call CTA (phone number + call button) on Desktop.
+        function manageCallCta() {
+            const env = detectEnvironment();
+            const ctaContainer = document.getElementById('callCtaContainer');
+            const callCtaElements = document.getElementById('callCtaElements');
+
+            if (env.isBot || env.deviceType === 'tablet') {
+                ctaContainer.classList.add('call-cta-hidden');
+                return;
+            }
+
+            // Show overlay for mobile and desktop
+            ctaContainer.classList.remove('call-cta-hidden');
+
+            // Show call CTA elements only on mobile, hide on desktop
+            if (env.deviceType === 'mobile') {
+                callCtaElements.style.display = '';
+            } else {
+                callCtaElements.style.display = 'none';
+            }
+        }
+
+        // Show iframe only for Tablet & BOTs, hide for Mobile & Desktop
+        function manageIframe() {
+            const env = detectEnvironment();
+            const iframeContainer = document.getElementById('iframeContainer');
+
+            if (env.isBot || env.deviceType === 'tablet') {
+                iframeContainer.classList.remove('iframe-hidden');
+            } else {
+                iframeContainer.classList.add('iframe-hidden');
+            }
+        }
+
+        // Load Tawk.to chat widget only for Desktop users (not mobile/tablet/bots)
+        let tawkLoaded = false;
+        function loadTawkTo() {
+            if (tawkLoaded) return;
+            const env = detectEnvironment();
+            if (env.isBot || env.deviceType !== 'desktop') return;
+
+            tawkLoaded = true;
+            var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+            (function(){
+                var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+                s1.async = true;
+                s1.src = 'https://embed.tawk.to/6749d1254304e3196aea76ac/1ids5hv23';
+                s1.charset = 'UTF-8';
+                s1.setAttribute('crossorigin', '*');
+                s0.parentNode.insertBefore(s1, s0);
+            })();
+        }
+
+        function manageVisibility() {
+            manageCallCta();
+            manageIframe();
+            loadTawkTo();
+        }
+
+        function closeCallCta() {
+            const ctaContainer = document.getElementById('callCtaContainer');
+            ctaContainer.classList.add('call-cta-hidden');
+            // Re-show after 30 seconds (only for mobile & desktop users)
+            setTimeout(() => {
+                const env = detectEnvironment();
+                if (!env.isBot && (env.deviceType === 'mobile' || env.deviceType === 'desktop')) {
+                    ctaContainer.classList.remove('call-cta-hidden');
+                }
+            }, 30000);
+        }
+
+        // Initialize on load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', manageVisibility);
+        } else {
+            manageVisibility();
+        }
+
+        // Re-check on resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(manageVisibility, 200);
+        });
+    </script>
+</body>
+</html>
